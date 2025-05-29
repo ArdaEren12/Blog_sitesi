@@ -1,0 +1,219 @@
+<!DOCTYPE html>
+<html lang="tr">
+
+<head>
+    <title>Arda Eren Blog Sayfası</title>
+
+    <!-- Meta -->
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" href="favicon.ico">
+
+    <!-- FontAwesome JS-->
+    <script defer src="https://use.fontawesome.com/releases/v5.7.1/js/all.js"
+        integrity="sha384-eVEQC9zshBn0rFj4+TU78eNA19HMNigMviK/PU/FFjLXqa/GKPgX58rvt5Z8PLs7" crossorigin="anonymous">
+    </script>
+
+    <!-- Theme CSS -->
+    <link id="theme-style" rel="stylesheet" href="assets/css/theme-1.css">
+
+    <style>
+        #quote-box {
+            font-family: 'Arial', sans-serif;
+            font-size: 18px;
+            font-style: italic;
+            color: #000;
+            margin: 20px;
+            padding: 15px;
+        }
+
+        .cv-button {
+            display: inline-block;
+            padding: 12px 24px;
+            background: linear-gradient(135deg, #007bff, #00d4ff);
+            color: white;
+            font-weight: bold;
+            font-size: 16px;
+            text-decoration: none;
+            border-radius: 8px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .cv-button::before {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: -75%;
+            width: 50%;
+            height: 100%;
+            background: rgba(255, 255, 255, 0.2);
+            transform: skewX(-20deg);
+            transition: all 0.5s ease;
+        }
+
+        .cv-button:hover::before {
+            left: 125%;
+        }
+
+        .cv-button:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 6px 16px rgba(0, 0, 0, 0);
+            color: black;
+            text-decoration: none;
+        }
+
+        body {
+            background-color: #f4f4f4;
+            margin: 0;
+        }
+    </style>
+</head>
+
+<body>
+
+    <header class="header text-center bg-info">
+        <h1 class="blog-name pt-lg-4 mb-0"><a href="index.html">Arda'nın Blog Sayfası</a></h1>
+
+        <nav class="navbar navbar-expand-lg navbar-dark">
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navigation"
+                aria-controls="navigation" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+
+            <div id="navigation" class="collapse navbar-collapse flex-column">
+                <div class="profile-section pt-3 pt-lg-0">
+                    <img class="profile-image " src="assets/images/arda.jpg" alt="image"
+                        style="border-radius: 150px; width: 250px;">
+
+                    <!-- ✅ RASTGELE CÜMLE BURAYA EKLENİYOR -->
+                    <div id="random-quote" class="mb-3 px-3" style="font-style: italic; font-size: 14px; color: #000;">
+                    </div>
+
+                    <div class="bio mb-3">
+                        Merhaba! Ben Arda, yazılım dünyasını keşfetmeyi seven bir geliştiriciyim. Bu blogda yazılım,
+                        kodlama ve teknolojiyi yakından ilgilendiren konuları paylaşıyorum..
+                        <hr>
+                    </div>
+
+                    <ul class="navbar-nav flex-column text-left">
+                        <li class="nav-item active">
+                            <a class="nav-link" href="index.php"><i class="fas fa-home fa-fw mr-2"></i>Anasayfa <span
+                                    class="sr-only">(current)</span></a>
+                        </li>
+
+                        <li class="nav-item">
+                            <a class="nav-link" href="about.html"><i class="fas fa-user fa-fw mr-2"></i>Hakkımda</a>
+                        </li>
+                    </ul>
+
+                    <ul class="social-list list-inline py-3 mx-auto">
+                        <li class="list-inline-item"><a href="https://www.linkedin.com/in/arda-eren51/"><i
+                                    class="fab fa-linkedin-in fa-fw"></i></a></li>
+                        <li class="list-inline-item"><a href="https://github.com/ArdaEren12"><i
+                                    class="fab fa-github-alt fa-fw"></i></a></li>
+                    </ul>
+                    <hr>
+
+                    <!-- ✅ DÜZELTİLMİŞ BUTON -->
+                    <div style="text-align: center; margin-top: 20px; ">
+                        <a href="https://drive.google.com/file/d/1LA8FVrHWtrMAFq6kzldSm7VTmg8uzpVu/view?usp=sharing" class="cv-button" target="_blank">
+                            <i class="fas fa-file-alt"></i> Özgeçmişimi İncelemek İsterseniz
+                        </a>
+                    </div>
+
+                </div>
+            </div>
+        </nav>
+    </header>
+
+
+
+
+    <!-- ✅ JavaScript KISMI -->
+    <script>
+        const quotes = [
+            "Kod yazarken kahvemi eksik etmem.",
+            "Her satırda kendimi yeniden keşfediyorum.",
+            "Sessizliğin içinde çalışan bir hayalperest.",
+            "Başarı, sabırla yazılmış satırlarda gizlidir.",
+            "Meraklı bir zihin, öğrenmeye doymayan bir kalp.",
+            "Yazarken öğreniyor, paylaşırken büyüyorum.",
+            "Hayaller büyük, kodlar temiz olmalı.",
+            "Hatalarımı bile güzel yazmaya çalışırım.",
+            "Fikir üretmek, satır satır yazmaktan başlar.",
+            "Yazılım geliştirici / Kahve bağımlısı / Uyku düşmanı."
+        ];
+
+        const randomIndex = Math.floor(Math.random() * quotes.length);
+        const randomQuote = quotes[randomIndex];
+        document.getElementById("random-quote").innerText = `"${randomQuote}"`;
+    </script>
+
+
+    <div class="main-wrapper">
+
+        <article class="about-section py-5">
+            <div class="container">
+                <h2 class="title mb-3">Hakkımda</h2>
+
+                <p>Merhaba! Ben Arda Eren, yazılım geliştirme dünyasına adım attığım günden bu yana teknolojiyi ve
+                    yazılımı hayatımın merkezine koyan biriyim. Şu an Necmettin Erbakan Üniversitesi'nde Yönetim Bilişim
+                    Sistemleri (MIS) bölümünde üçüncü sınıf öğrencisiyim ve yazılım geliştirme alanında kendimi sürekli
+                    olarak geliştirmeye devam ediyorum. </p>
+                <figure><img class="img-fluid" src="assets/images/robot.jpg" alt="image"></figure>
+                <h5 class="mt-5">Web Geliştirmeye Olan Tutkum</h5>
+                <p>Son dönemde özellikle web geliştirme alanına yoğunlaşıyorum. Full-stack web geliştirme üzerine
+                    çalışarak, hem frontend hem de backend teknolojileriyle projeler geliştiriyorum. Bu süreçte HTML,
+                    CSS, JavaScript gibi frontend dillerine hakimiyetimi pekiştirirken, PHP, Node.js ve SQL gibi backend
+                    teknolojileriyle de projeler ürettim. Öne çıkan projelerimden biri, bir otel yönetim sistemi
+                    geliştirdiğimiz full-stack bir uygulama oldu. Bu projede, kullanıcıların otel odalarını rezervasyon
+                    yapabildiği, yöneticilerin ise otel yönetimiyle ilgili işlemleri takip edebildiği bir platform
+                    tasarladım.</p>
+                <h5 class="mt-5">Kullanıcı Dostu Çözümler Üretiyorum</h5>
+                <p>Web geliştirme ile ilgili derinlemesine bilgi edinirken, kullanıcılara hızlı ve etkili çözümler
+                    sunmayı, kullanıcı dostu arayüzler tasarlamayı hedefliyorum. Frontend ve backend arasındaki
+                    etkileşimi sorunsuz bir şekilde sağlamak, kullanıcı deneyimini ön planda tutmak benim için çok
+                    önemli.
+
+                </p>
+                <h5 class="mt-5">Yazılım ve 3D Modelleme Alanındaki Gelişimim</h5>
+                <p>Ayrıca yazılım ve 3D modelleme gibi alanlarda da becerilerimi geliştirmeye devam ediyorum.
+                    Teknolojiye olan tutkum, her zaman yeni bir şeyler öğrenmeye ve kendimi geliştirmeye yönlendiriyor.
+                    Bu blogda, web geliştirme, yazılım projelerim, kişisel gelişim ve teknoloji dünyasıyla ilgili
+                    deneyimlerimi paylaşıyor olacağım.
+
+                </p>
+                <h5 class="mt-5">İletişime Geçmekten Çekinmeyin</h5>
+                <p>Geliştirdiğim projeler hakkında daha fazla bilgi almak veya herhangi bir konuda sorularınız varsa,
+                    benimle iletişime geçmekten memnuniyet duyarım!
+                </p>
+
+            </div>
+        </article>
+        <!--//about-section-->
+
+
+
+
+
+    </div>
+    <!--//main-wrapper-->
+
+
+
+    <!-- Javascript -->
+    <script src="assets/plugins/jquery-3.3.1.min.js"></script>
+    <script src="assets/plugins/popper.min.js"></script>
+    <script src="assets/plugins/bootstrap/js/bootstrap.min.js"></script>
+
+    <!-- Style Switcher (REMOVE ON YOUR PRODUCTION SITE) -->
+    <script src="assets/js/demo/style-switcher.js"></script>
+
+
+</body>
+
+</html>

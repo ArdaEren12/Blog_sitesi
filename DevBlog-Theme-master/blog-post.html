@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+  <meta charset="UTF-8">
+  <title>Blog</title>
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+  <style>
+    .category-boxes {
+      display: flex;
+      gap: 10px;
+      justify-content: center;
+      margin: 20px 0;
+      flex-wrap: wrap;
+    }
+
+    .category-box {
+      padding: 10px 20px;
+      background: #f1f1f1;
+      border: 2px solid #007BFF;
+      border-radius: 30px;
+      cursor: pointer;
+    }
+
+    .category-box.active,
+    .category-box:hover {
+      background: #007BFF;
+      color: #fff;
+    }
+
+    .blog-card {
+      border-left: 5px solid #007BFF;
+      padding: 20px;
+      background: #fff;
+      margin-bottom: 15px;
+      border-radius: 5px;
+      display: none; /* Başlangıçta tüm blog yazıları gizli */
+    }
+
+    .blog-card.show {
+      display: block; /* Filtreleme sırasında blog yazılarını göster */
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h1 class="text-center mt-4">Katagori</h1>
+
+    <!-- Dinamik Kategori Kutuları -->
+    <div class="category-boxes">
+      <div class="category-box" data-category="all">Tümü</div>
+      <?php
+      // Kategorileri veritabanından çek
+      $kategoriSorgu = $db->query("SELECT * FROM kategoriler", PDO::FETCH_ASSOC);
+      foreach ($kategoriSorgu as $kategori): ?>
+      <div class="category-box" data-category="<?= $kategori['kategori_id'] ?>">
+        <?= htmlspecialchars($kategori['kategori_adi']) ?>
+      </div>
+      <?php endforeach; ?>
+    </div>
+
+    <!-- Blog Kartları -->
+    <?php
+    // Blog yazılarını veritabanından çek
+    $sorgu = $db->query("SELECT yazilar.*, kategoriler.kategori_adi FROM yazilar 
+                         LEFT JOIN kategoriler ON yazilar.kategori_id = kategoriler.kategori_id", PDO::FETCH_ASSOC);
+    foreach ($sorgu as $yazi): ?>
+    <div class="blog-card" data-tags="<?= $yazi['kategori_id'] ?>">
+      <h3><?= htmlspecialchars($yazi['yazi_baslik']) ?></h3>
+      <p><?= mb_strimwidth(strip_tags($yazi['yazi_icerik']), 0, 100, "...") ?></p>
+      <a href="blog-post.php?yazi_id=<?= $yazi['yazi_id'] ?>">Devamını oku</a>
+    </div>
+    <?php endforeach; ?>
+  </div>
+
+  <script>
+    const categoryBoxes = document.querySelectorAll('.category-box');
+    const blogCards = document.querySelectorAll('.blog-card');
+
+    categoryBoxes.forEach(box => {
+      box.addEventListener('click', () => {
+        categoryBoxes.forEach(b => b.classList.remove('active'));
+        box.classList.add('active');
+        const kategori = box.getAttribute('data-category');
+
+        blogCards.forEach(card => {
+          const tags = card.getAttribute('data-tags');
+          // 'all' seçeneği seçildiğinde tüm yazıları göster
+          if (kategori === 'all' || tags === kategori) {
+            card.classList.add('show');
+          } else {
+            card.classList.remove('show');
+          }
+        });
+      });
+    });
+
+    // Sayfa yüklendiğinde 'Tümü' kategorisinin tıklanmasını sağla
+    document.querySelector('[data-category="all"]').click();
+  </script>
+</body>
+</html>
